@@ -30,6 +30,7 @@ public class OpenPrefabElement
     public double Version { get; set; } = 0.1;
     public Guid ElementId { get; set; }
     public string Description { get; set; } = string.Empty;
+    public ElementType ElementType { get; set; }
     public Project Project { get; set; }
     public ErpMappings ErpMappings { get; set; }
     public Dictionary<string, object> CustomAttributes { get; protected set; }
@@ -39,6 +40,7 @@ public class OpenPrefabElement
     public static OpenPrefabElement Create(
         string description,
         Project project,
+        ElementType elementType,
         ErpMappings mappings,
         string creatingSoftware,
         string author)
@@ -56,6 +58,7 @@ public class OpenPrefabElement
             Description = description,
             Project = project,
             ElementId = Guid.NewGuid(),
+            ElementType = elementType,
             ErpMappings = mappings,
             MetaData = metaData
         };
