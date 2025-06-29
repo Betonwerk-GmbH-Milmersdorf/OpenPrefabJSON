@@ -31,6 +31,7 @@ public class OpenPrefabElement
     public Guid ElementId { get; set; }
     public string Description { get; set; } = string.Empty;
     public ElementType ElementType { get; set; }
+    public PhysicalProperties PhysicalProperties { get; set; }
     public Project Project { get; set; }
     public ErpMappings ErpMappings { get; set; }
     public Dictionary<string, object> CustomAttributes { get; protected set; }
@@ -39,6 +40,7 @@ public class OpenPrefabElement
 
     public static OpenPrefabElement Create(
         string description,
+        PhysicalProperties physicalProperties,
         Project project,
         ElementType elementType,
         ErpMappings mappings,
@@ -56,6 +58,7 @@ public class OpenPrefabElement
         return new OpenPrefabElement()
         {
             Description = description,
+            PhysicalProperties = physicalProperties,
             Project = project,
             ElementId = Guid.NewGuid(),
             ElementType = elementType,
