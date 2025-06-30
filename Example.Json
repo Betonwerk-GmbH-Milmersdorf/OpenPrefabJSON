@@ -1,0 +1,7 @@
+﻿{
+  "format": "OpenPrefabJSON",
+  "version": "1.0",
+  "elementId": "uuid",        // z. B. "0f12c5b0-1f6e-4c56-9d3c-8e9c0214e2a7"
+  "elementNumber": "string",  // z. B. "1" oder "Typ A"
+  "description": "string"     // z. B. "HFT-Sturz, Position 31a“
+}
