@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Pr
 		Schema\openprefab.schema.json = Schema\openprefab.schema.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{BCA5D991-FD30-46BA-A7D2-05D9A058EB07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{6D7F9856-3ED2-4D0C-A916-A05ABAA7E5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D7F9856-3ED2-4D0C-A916-A05ABAA7E5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D7F9856-3ED2-4D0C-A916-A05ABAA7E5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA5D991-FD30-46BA-A7D2-05D9A058EB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA5D991-FD30-46BA-A7D2-05D9A058EB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA5D991-FD30-46BA-A7D2-05D9A058EB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA5D991-FD30-46BA-A7D2-05D9A058EB07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

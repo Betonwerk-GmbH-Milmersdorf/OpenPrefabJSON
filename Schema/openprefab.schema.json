@@ -15,6 +15,24 @@
     "elementId": {
       "type": "string",
       "format": "uuid"
+    },
+    "classification": {
+      "type": "object",
+      "required": [ "type", "concreteQuality" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Main type of the concrete element (e.g., Slab, Wall, Stair)."
+        },
+        "subType": {
+          "type": "string",
+          "description": "Subtype such as HollowCoreSlab, Straight, HalfTurned etc."
+        },
+        "concreteQuality": {
+          "type": "string",
+          "description":  "Quality of the concrete"
+        }
+      }
     }
   }
 }
