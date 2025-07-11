@@ -7,6 +7,14 @@
     "format": {
       "type": "string",
       "const": "OpenPrefabJSON"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "elementId": {
+      "type": "string",
+      "format": "uuid"
     }
   }
 }

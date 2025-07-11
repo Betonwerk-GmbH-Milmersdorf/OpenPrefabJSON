@@ -10,6 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{02EA
 		Example.Json = Example.Json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{84D27F74-D2BA-6C25-2661-968F101900D9}"
+	ProjectSection(SolutionItems) = preProject
+		Schema\openprefab.schema.json = Schema\openprefab.schema.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
