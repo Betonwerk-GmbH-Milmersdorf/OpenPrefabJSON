@@ -1,7 +1,23 @@
 ﻿{
   "format": "OpenPrefabJSON",
   "version": "1.0",
-  "elementId": "uuid",        // z. B. "0f12c5b0-1f6e-4c56-9d3c-8e9c0214e2a7"
-  "elementNumber": "string",  // z. B. "1" oder "Typ A"
-  "description": "string"     // z. B. "HFT-Sturz, Position 31a“
+  "elementId": "uuid", // z. B. "0f12c5b0-1f6e-4c56-9d3c-8e9c0214e2a7"
+  "elementNumber": "string", // z. B. "1" oder "Typ A"
+  "description": "string", // z. B. "HFT-Sturz, Position 31a“
+  "classification": { // Produkttyp, Normen, DIN
+    "type": "string", // z. B. "Wall", "Slab", "Stair", "Balcony", "Beam",
+    "subtype": "string", // z. B. "HollowCoreSlab", "Straight", "HalfTurned"
+    "concreteQuality": "string", // Betongüte
+    "standard": "string", // Normung
+    "revision": "string" // Revisionsnummer oder Zeichnungsindex 
+  },
+  "project": {
+    "projectId": "string", // Projekt ID, wie sie das ERP erfordert
+    "name": "string", // Name des Bauvorhabens
+    "street": "string", // Straße des Bauvorhabens
+    "postalCode": "string", // Postleitzahl des Bauvorhabens
+    "city": "string", // Stadt des Bauvorhabens
+    "buildingSection": "string", // Gebäudeinformation, Haus 1, Haus A o.ä.
+    "floor": "string" // z.B. 1.OG
+  }
 }
