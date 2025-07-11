@@ -26,16 +26,35 @@ public class OpenPrefabElement
     }
 
     #region Props
-    public static string Format =>  "OpenPrefabJSON";
-    public double Version { get; set; } = 0.1;
+    [JsonPropertyName("format")]
+    public string Format =>  "OpenPrefabJSON";
+    
+    [JsonPropertyName("version")]
+    public string Version { get; set; } = "0.1";
+    
+    [JsonPropertyName("elementId")]
     public Guid ElementId { get; set; }
+
+    [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;
-    public Classification ElementType { get; set; }
+
+    [JsonPropertyName("classification")]
+    public Classification Classification { get; set; }
+
+    [JsonPropertyName("physicalProperties")]
     public PhysicalProperties PhysicalProperties { get; set; }
+
+    [JsonPropertyName("project")]
     public Project Project { get; set; }
+
+    [JsonPropertyName("erpMappings")]
     public ErpMappings ErpMappings { get; set; }
+    
+    [JsonPropertyName("customAttributes")]
     public Dictionary<string, object> CustomAttributes { get; protected set; }
-    public MetaData? MetaData { get; set; }
+
+    [JsonPropertyName("metaData")]
+    public MetaData MetaData { get; set; }
     #endregion
 
     public static OpenPrefabElement Create(
@@ -61,7 +80,7 @@ public class OpenPrefabElement
             PhysicalProperties = physicalProperties,
             Project = project,
             ElementId = Guid.NewGuid(),
-            ElementType = elementType,
+            Classification = elementType,
             ErpMappings = mappings,
             MetaData = metaData
         };

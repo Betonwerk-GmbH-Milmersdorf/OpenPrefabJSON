@@ -1,123 +1,88 @@
-﻿using Json.Schema;
+﻿using Domain.Entities;
+using Json.Schema;
+using System.Diagnostics;
 using System.Text.Json;
+using Xunit.Abstractions;
 
 namespace Tests;
 
-public class JsonTests
+public class JsonTests(ITestOutputHelper output)
 {
-    [Fact]
-    public void ShouldSerializeConcreteElementWithEmbeddedParts()
-    {
-        var embeddedParts = new[]
-        {
-            new Dictionary<string, object>
-            {
-                { "articleNumber", "ZUB-30420" },
-                { "description", "Hülse für Geländeranschluss" },
-                { "quantity", 4 },
-                { "unit", "Stück" }
-            },
-            new Dictionary<string, object>
-            {
-                { "articleNumber", "ZUB-50012" },
-                { "description", "Leerrohr für Elektrik" },
-                { "quantity", 2.5 },
-                { "unit", "m" }
-            }
-        };
-
-        var element = new
-        {
-            id = Guid.NewGuid(),
-            type = new
-            {
-                main = "Slab",
-                subtype = "HollowCoreSlab"
-            },
-            erpMappings = new
-            {
-                articleNumber = "SL-2025-041",
-                costCenter = "Fertigung Süd",
-                workflowStep = "Bewehrung abgeschlossen",
-                linkedBillOfMaterials = new[] { "RZ12", "ST12" }
-            },
-            embeddedParts = embeddedParts,
-            customAttributes = new Dictionary<string, object>
-                {
-                    { "Brandschutzklasse", "F30" },
-                    { "Oberflächenversiegelung", "Hydrophobierung" }
-                },
-            createdAt = DateTime.UtcNow
-        };
-
-        var json = JsonSerializer.Serialize(element, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
-
-        Assert.Contains("HollowCoreSlab", json);
-        Assert.Contains("ZUB-30420", json);
-        Assert.Contains("customAttributes", json);
-        Assert.DoesNotContain("error", json, StringComparison.OrdinalIgnoreCase);
-    }
+    private readonly ITestOutputHelper _output = output;
 
     [Fact]
     public async void ConcreteElement_ShouldMatchOpenPrefabJsonSchema()
     {
-        var embeddedParts = new[]
+        string description = "FT Sturz";
+
+        PhysicalProperties physicalProperties = new()
         {
-            new Dictionary<string, object>
-            {
-                { "articleNumber", "ZUB-30420" },
-                { "description", "Hülse für Geländeranschluss" },
-                { "quantity", 4 },
-                { "unit", "Stück" }
-            },
-            new Dictionary<string, object>
-            {
-                { "articleNumber", "ZUB-50012" },
-                { "description", "Leerrohr für Elektrik" },
-                { "quantity", 2.5 },
-                { "unit", "m" }
-            }
+            Length = 3,
+            Width = 0.5,
+            Height = 0.2,
+            Volume = 3 * 0.5 * 0.2,
+            Weight = 3 * 0.5 * 0.2 * 2.5
         };
 
-        var element = new
+        Project project = new()
         {
-            id = Guid.NewGuid(),
-            type = new
-            {
-                main = "Slab",
-                subtype = "HollowCoreSlab"
-            },
-            erpMappings = new
-            {
-                articleNumber = "SL-2025-041",
-                costCenter = "Fertigung Süd",
-                workflowStep = "Bewehrung abgeschlossen",
-                linkedBillOfMaterials = new[] { "RZ12", "ST12" }
-            },
-            embeddedParts = embeddedParts,
-            customAttributes = new Dictionary<string, object>
-                {
-                    { "Brandschutzklasse", "F30" },
-                    { "Oberflächenversiegelung", "Hydrophobierung" }
-                },
-            createdAt = DateTime.UtcNow
+            ProjectId = "123456",
+            Name = "EFH Test",
+            Street = "Teststraße 1",
+            Postalcode = "10118",
+            City = "Berlin",
+            Building = "Haus 1",
+            Floor = "EG"
         };
+
+        Classification classification = new("Stair", "C40/50");
+
+        ErpMappings erpMappings = new()
+        {
+            ArticleNumber = "10000",
+            CostCenter = "1122",
+            Amount = 3,
+            Unit = "m"
+        };
+
+        var element = OpenPrefabElement.Create(
+            description,
+            physicalProperties,
+            project,
+            classification,
+            erpMappings,
+            "OpenPrefabJsonTest",
+            "TestAuthor");
 
         // JSON serialisieren
-        var node = JsonSerializer.SerializeToNode(element);
+        string jsonString = JsonSerializer.Serialize(element);
+        using var jsonDoc = JsonDocument.Parse(jsonString);
 
         // Schema von GitHub laden
         using var http = new HttpClient();
         var schemaText = await http.GetStringAsync("https://raw.githubusercontent.com/Betonwerk-GmbH-Milmersdorf/OpenPrefabJSON/master/Schema/openprefab.schema.json");
         var schema = JsonSchema.FromText(schemaText);
 
-        // Validierung
-        var result = schema.Evaluate(node);
+        var result = schema.Evaluate(jsonDoc.RootElement, new EvaluationOptions
+        {
+            OutputFormat = OutputFormat.Hierarchical,
+            RequireFormatValidation = true
+        });
 
-        // Ergebnis prüfen
-        Assert.True(result.IsValid, $"Schema validation failed:\n{result.Errors}");
+        if (!result.IsValid)
+        {
+            var errorJson = JsonSerializer.Serialize(result.Details, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+
+            //// → xUnit-konforme Ausgabe
+            //_output.WriteLine("Schema validation failed:\n" + errorJson);
+
+            _output.WriteLine("VALIDATION ERROR:");
+            _output.WriteLine(errorJson);
+        }
+
+        Assert.True(result.IsValid, "JSON entspricht nicht dem Schema.");
     }
 }

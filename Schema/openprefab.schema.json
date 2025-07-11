@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OpenPrefabJSON",
   "type": "object",
-  "required": ["format", "version", "elementId", "classification", "physicalProperties", "project", "erpMappings", "metadata"],
+  "required": [ "format", "version", "description", "elementId", "classification", "metaData" ],
   "properties": {
     "format": {
       "type": "string",
@@ -11,6 +11,9 @@
     "version": {
       "type": "string",
       "pattern": "^\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string"
     },
     "elementId": {
       "type": "string",
@@ -30,7 +33,29 @@
         },
         "concreteQuality": {
           "type": "string",
-          "description":  "Quality of the concrete"
+          "description": "Quality of the concrete"
+        }
+      }
+    },
+    "metaData": {
+      "type": "object",
+      "required": [ "createdBy", "createdAt", "lastModified", "author" ],
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of creation (UTC)."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of modification (UTC)."
+        },
+        "author": {
+          "type": "string"
         }
       }
     }

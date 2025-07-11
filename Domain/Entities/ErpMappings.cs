@@ -15,8 +15,15 @@ public class ErpMappings
         Unit = unit;
     }
 
+    [JsonPropertyName("articleNumber")]
     public string ArticleNumber { get; set; }
-  	public string CostCenter { get; set; }
-	public double Amount  { get; set; }
+
+    [JsonPropertyName("costCenter")]
+    public string CostCenter { get; set; }
+
+    [JsonPropertyName("amount")]
+    public double Amount  { get; set; }
+
+    [JsonPropertyName("unit")]
     public string Unit { get; set; }
 }
