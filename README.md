@@ -1,3 +1,5 @@
+## Under Constuction
+
 Einleitung
 
 Die zunehmende **Digitalisierung** in der Bau- und Fertigteilindustrie erfordert offene, systemunabhängige Schnittstellen für den zuverlässigen Austausch von Produkt- und Fertigungsdaten. Besonders im Bereich der Betonfertigteile sind heute viele Prozesse in Planung, Arbeitsvorbereitung, Produktion und Logistik digital abgebildet – jedoch meist in voneinander getrennten Systemen.
