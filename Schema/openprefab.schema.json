@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenPrefabJSON",
+  "type": "object",
+  "required": ["format", "version", "elementId", "classification", "physicalProperties", "project", "erpMappings", "metadata"],
+  "properties": {
+    "format": {
+      "type": "string",
+      "const": "OpenPrefabJSON"
+    }
+  }
+}
