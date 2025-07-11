@@ -11,6 +11,12 @@
     "standard": "string", // Normung
     "revision": "string" // Revisionsnummer oder Zeichnungsindex 
   },
+  "physicalProperties": {
+    "length": "number", // Länge des Bauteils (Bounding Box)
+    "width": "number", // Breite des Bauteils (Bounding Box)
+    "height": "number", // Höhe des Bauteils (Bounding Box)
+    "volume": "number" // Volumen des Bauteils 
+  },
   "project": {
     "projectId": "string", // Projekt ID, wie sie das ERP erfordert
     "name": "string", // Name des Bauvorhabens
@@ -19,5 +25,17 @@
     "city": "string", // Stadt des Bauvorhabens
     "buildingSection": "string", // Gebäudeinformation, Haus 1, Haus A o.ä.
     "floor": "string" // z.B. 1.OG
+  },
+  "erpMappings": {
+    "articleNumber": "string", // Artikelnummer des Elements
+    "costCenter": "string", // Kostenstelle
+    "amount": "number", // Menge
+    "unit": "string" // Einheit des Artikels, z.B. m, m², Stk.
+  },
+  "metadata": {
+    "createdBy": "string", // z.B "Planungssoftware X"
+    "createdAt": "string", // ISO 8601, z.B. "2025-06-05T23:45:00Z",
+    "lastModified": "string", // ISO 8601, z.B. "2025-06-06T09:00:00Z",
+    "author": "string" // Name des Erstellers
   }
 }

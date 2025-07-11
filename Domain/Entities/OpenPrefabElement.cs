@@ -30,7 +30,7 @@ public class OpenPrefabElement
     public double Version { get; set; } = 0.1;
     public Guid ElementId { get; set; }
     public string Description { get; set; } = string.Empty;
-    public ElementType ElementType { get; set; }
+    public Classification ElementType { get; set; }
     public PhysicalProperties PhysicalProperties { get; set; }
     public Project Project { get; set; }
     public ErpMappings ErpMappings { get; set; }
@@ -42,7 +42,7 @@ public class OpenPrefabElement
         string description,
         PhysicalProperties physicalProperties,
         Project project,
-        ElementType elementType,
+        Classification elementType,
         ErpMappings mappings,
         string creatingSoftware,
         string author)

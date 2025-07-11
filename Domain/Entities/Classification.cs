@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities;
 
-public class ElementType
+public class Classification
 {
-    protected ElementType() { }
+    protected Classification() { }
 
-    public ElementType(string main, string subtype)
+    public Classification(string main, string subtype)
     {
         Main = main;
         Subtype = subtype;
